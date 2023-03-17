@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
 import '../../model/dataclass.dart';
+import '../detailPage.dart';
 
 class recommendationList extends StatelessWidget {
   const recommendationList({super.key});
@@ -21,6 +22,7 @@ class recommendationList extends StatelessWidget {
       dataClass('assets/Semporna.jfif', 5.0, 'Semporna', 'Sabah', 56),
       dataClass('assets/Tawau.jfif', 3.5, 'Tawau', 'Sabah', 58),
     ];
+
     return Expanded(
       child: ListView.builder(
         itemCount: data.length,
@@ -36,10 +38,23 @@ class recommendationList extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Container(
-                  height: 100,
-                  width: 160,
-                  decoration: buildImageDecoration(data[index].pictPath),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: ((context) {
+                      return DetailPage(
+                        index: index,
+                      );
+                    })));
+                  },
+                  child: Hero(
+                    tag: data[index].pictPath,
+                    child: Container(
+                      height: 100,
+                      width: 160,
+                      decoration: buildImageDecoration(data[index].pictPath),
+                    ),
+                  ),
                 ),
                 ListTile(
                   title: SizedBox(
